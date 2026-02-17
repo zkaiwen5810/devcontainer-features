@@ -1,0 +1,29 @@
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+HISTFILE=~/.zsh_history
+HISTSIZE=20000
+SAVEHIST=20000
+setopt APPEND_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE SHARE_HISTORY INC_APPEND_HISTORY
+
+setopt AUTOCD INTERACTIVE_COMMENTS NO_BEEP
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats ' (%b)'
+setopt PROMPT_SUBST
+PROMPT='%F{cyan}%n@%m%f %F{blue}%~%f${vcs_info_msg_0_} %# '
+
+export EDITOR=code
+alias ll='ls -alF'
+alias la='ls -A'
+alias ..='cd ..'

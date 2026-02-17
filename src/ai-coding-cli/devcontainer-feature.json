@@ -1,6 +1,6 @@
 {
   "id": "ai-coding-cli",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "name": "AI Coding CLIs (Claude Code, Codex, OpenCode)",
   "description": "Installs common AI coding CLIs as an optional add-on.",
   "options": {
@@ -13,6 +13,16 @@
       "type": "boolean",
       "default": true,
       "description": "Install zsh and set it as default shell for vscode user"
+    },
+    "installZshrc": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install a minimal zshrc into the remote user's home"
+    },
+    "overwriteZshrc": {
+      "type": "boolean",
+      "default": false,
+      "description": "Overwrite existing ~/.zshrc if present"
     }
   }
 }

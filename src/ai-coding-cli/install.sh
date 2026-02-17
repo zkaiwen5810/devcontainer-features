@@ -34,3 +34,28 @@ curl -fsSL https://claude.ai/install.sh | bash
 if id vscode >/dev/null 2>&1 && [ "${INSTALL_ZSH}" = "true" ]; then
   chsh -s /usr/bin/zsh vscode || true
 fi
+
+INSTALL_ZSHRC="${INSTALL_ZSHRC:-true}"
+OVERWRITE_ZSHRC="${OVERWRITE_ZSHRC:-false}"
+
+if [ "${INSTALL_ZSHRC}" = "true" ]; then
+  # Determine remote user (Dev Containers sets _REMOTE_USER; fall back to vscode)
+  echo "[DEBUG] env _REMOTE_USER ${_REMOTE_USER}"
+  REMOTE_USER="${_REMOTE_USER:-vscode}"
+  REMOTE_HOME="$(getent passwd "${REMOTE_USER}" | cut -d: -f6 || true)"
+
+  if [ -z "${REMOTE_HOME}" ]; then
+    echo "WARN: Could not determine home for ${REMOTE_USER}; skipping zshrc install."
+  else
+    mkdir -p "${REMOTE_HOME}"
+    TARGET="${REMOTE_HOME}/.zshrc"
+
+    if [ -f "${TARGET}" ] && [ "${OVERWRITE_ZSHRC}" != "true" ]; then
+      echo "INFO: ${TARGET} exists; not overwriting (set overwriteZshrc=true to overwrite)."
+    else
+      install -m 0644 ./zshrc.min "${TARGET}"
+      chown "${REMOTE_USER}:${REMOTE_USER}" "${TARGET}" || true
+      echo "INFO: Installed minimal zshrc to ${TARGET}"
+    fi
+  fi
+fi
