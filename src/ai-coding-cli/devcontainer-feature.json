@@ -1,0 +1,23 @@
+{
+  "id": "ai-coding-cli",
+  "version": "0.1.0",
+  "name": "AI Coding CLIs (Claude Code, Codex, OpenCode)",
+  "description": "Installs common AI coding CLIs as an optional add-on.",
+  "options": {
+    "nodeMajor": {
+      "type": "string",
+      "default": "22",
+      "description": "Node major version to install if node is missing"
+    },
+    "claudeChannel": {
+      "type": "string",
+      "default": "stable",
+      "description": "Claude Code channel passed to installer"
+    },
+    "installZsh": {
+      "type": "boolean",
+      "default": true,
+      "description": "Install zsh and set it as default shell for vscode user"
+    }
+  }
+}

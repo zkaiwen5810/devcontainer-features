@@ -1,0 +1,25 @@
+name: Publish ai-coding-cli feature
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "src/ai-coding-cli/**"
+      - ".github/workflows/publish-ai-coding-cli.yml"
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: devcontainers-community/publish-feature@v1
+        with:
+          path: src/ai-coding-cli
