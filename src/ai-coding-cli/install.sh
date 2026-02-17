@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -euxo pipefail
 
 NODE_MAJOR="${NODE_MAJOR:-22}"
-CLAUDE_CHANNEL="${CLAUDE_CHANNEL:-stable}"
 INSTALL_ZSH="${INSTALL_ZSH:-true}"
 
 apt-get update
@@ -29,7 +28,7 @@ npm install -g --omit=dev @openai/codex opencode-ai
 npm cache clean --force || true
 
 # Claude Code via official installer script
-curl -fsSL https://claude.ai/install.sh | bash -s "${CLAUDE_CHANNEL}"
+curl -fsSL https://claude.ai/install.sh | bash
 
 # Prefer zsh
 if id vscode >/dev/null 2>&1 && [ "${INSTALL_ZSH}" = "true" ]; then

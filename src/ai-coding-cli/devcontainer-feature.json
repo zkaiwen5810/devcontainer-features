@@ -1,6 +1,6 @@
 {
   "id": "ai-coding-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "name": "AI Coding CLIs (Claude Code, Codex, OpenCode)",
   "description": "Installs common AI coding CLIs as an optional add-on.",
   "options": {
@@ -8,11 +8,6 @@
       "type": "string",
       "default": "22",
       "description": "Node major version to install if node is missing"
-    },
-    "claudeChannel": {
-      "type": "string",
-      "default": "stable",
-      "description": "Claude Code channel passed to installer"
     },
     "installZsh": {
       "type": "boolean",
