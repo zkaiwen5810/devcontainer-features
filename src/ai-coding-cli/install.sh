@@ -24,11 +24,11 @@ if ! command -v node >/dev/null 2>&1; then
 fi
 
 # Codex & OpenCode via npm
-npm install -g --omit=dev @openai/codex opencode-ai
+npm install -g --omit=dev @anthropic-ai/claude-code @openai/codex opencode-ai
 npm cache clean --force || true
 
 # Claude Code via official installer script
-curl -fsSL https://claude.ai/install.sh | bash
+# curl -fsSL https://claude.ai/install.sh | bash
 
 # Prefer zsh
 if id vscode >/dev/null 2>&1 && [ "${INSTALL_ZSH}" = "true" ]; then
