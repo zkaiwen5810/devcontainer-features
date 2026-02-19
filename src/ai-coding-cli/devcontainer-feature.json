@@ -1,6 +1,6 @@
 {
   "id": "ai-coding-cli",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "name": "AI Coding CLIs (Claude Code, Codex, OpenCode)",
   "description": "Installs common AI coding CLIs as an optional add-on.",
   "options": {
