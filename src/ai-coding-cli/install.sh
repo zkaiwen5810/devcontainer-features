@@ -39,22 +39,23 @@ npm cache clean --force || true
 # ⭐ Claude Code user-level install
 # =====================================================
 
-# Devcontainer 会注入 _REMOTE_USER
-REMOTE_USER="${_REMOTE_USER}"
-REMOTE_HOME="$(getent passwd "${REMOTE_USER}" | cut -d: -f6)"
+if [ "$INSTALL_CC" = "true" ]; then
+  # Devcontainer 会注入 _REMOTE_USER
+  REMOTE_USER="${_REMOTE_USER}"
+  REMOTE_HOME="$(getent passwd "${REMOTE_USER}" | cut -d: -f6)"
 
-echo "[INFO] Installing Claude Code for user: ${REMOTE_USER}"
-echo "[INFO] HOME: ${REMOTE_HOME}"
+  echo "[INFO] Installing Claude Code for user: ${REMOTE_USER}"
+  echo "[INFO] HOME: ${REMOTE_HOME}"
 
-if [ -z "${REMOTE_HOME}" ]; then
-  echo "WARN: Cannot detect user home. Skipping Claude install."
-else
-  # 确保用户 home 权限
-  mkdir -p "${REMOTE_HOME}"
-  chown -R "${REMOTE_USER}:${REMOTE_USER}" "${REMOTE_HOME}"
+  if [ -z "${REMOTE_HOME}" ]; then
+    echo "WARN: Cannot detect user home. Skipping Claude install."
+  else
+    # 确保用户 home 权限
+    mkdir -p "${REMOTE_HOME}"
+    chown -R "${REMOTE_USER}:${REMOTE_USER}" "${REMOTE_HOME}"
 
-  # ⭐ 使用 sudo -u + -H 切换 HOME
-  sudo -u "${REMOTE_USER}" -H bash <<EOF
+    # ⭐ 使用 sudo -u + -H 切换 HOME
+    sudo -u "${REMOTE_USER}" -H bash <<EOF
 set -euxo pipefail
 
 export HOME="${REMOTE_HOME}"
@@ -64,6 +65,7 @@ export PATH="\$HOME/.local/bin:\$PATH"
 curl -fsSL https://claude.ai/install.sh | bash
 
 EOF
+  fi
 fi
 
 
