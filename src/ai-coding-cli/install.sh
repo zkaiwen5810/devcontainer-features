@@ -39,6 +39,8 @@ npm cache clean --force || true
 # ⭐ Claude Code user-level install
 # =====================================================
 
+INSTALL_CC="${INSTALL_CC:-true}"
+
 if [ "$INSTALL_CC" = "true" ]; then
   # Devcontainer 会注入 _REMOTE_USER
   REMOTE_USER="${_REMOTE_USER}"
