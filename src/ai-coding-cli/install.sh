@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euxo pipefail
 
-NODE_MAJOR="${NODE_MAJOR:-22}"
-INSTALL_ZSH="${INSTALL_ZSH:-true}"
+NODE_MAJOR="${NODEMAJOR:-22}"
+INSTALL_ZSH="${INSTALLZSH:-true}"
 
 # =====================
 # System deps (root)
@@ -39,7 +39,7 @@ npm cache clean --force || true
 # ⭐ Claude Code user-level install
 # =====================================================
 
-INSTALL_CC="${INSTALL_CC:-true}"
+INSTALL_CC="${INSTALLCC:-true}"
 
 if [ "$INSTALL_CC" = "true" ]; then
   # Devcontainer 会注入 _REMOTE_USER
@@ -82,8 +82,8 @@ fi
 # =====================
 # zshrc install
 # =====================
-INSTALL_ZSHRC="${INSTALL_ZSHRC:-true}"
-OVERWRITE_ZSHRC="${OVERWRITE_ZSHRC:-false}"
+INSTALL_ZSHRC="${INSTALLZSHRC:-true}"
+OVERWRITE_ZSHRC="${OVERWRITEZSHRC:-false}"
 
 if [ "${INSTALL_ZSHRC}" = "true" ]; then
 
