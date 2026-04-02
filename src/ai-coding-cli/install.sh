@@ -40,12 +40,11 @@ npm cache clean --force || true
 # =====================================================
 
 INSTALL_CC="${INSTALLCC:-true}"
+# Devcontainer 会注入 _REMOTE_USER
+REMOTE_USER="${_REMOTE_USER}"
+REMOTE_HOME="$(getent passwd "${REMOTE_USER}" | cut -d: -f6)"
 
 if [ "$INSTALL_CC" = "true" ]; then
-  # Devcontainer 会注入 _REMOTE_USER
-  REMOTE_USER="${_REMOTE_USER}"
-  REMOTE_HOME="$(getent passwd "${REMOTE_USER}" | cut -d: -f6)"
-
   echo "[INFO] Installing Claude Code for user: ${REMOTE_USER}"
   echo "[INFO] HOME: ${REMOTE_HOME}"
 
